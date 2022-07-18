@@ -1,0 +1,15 @@
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: springboot
+    password: springboot
+    url: jdbc:mariadb://localhost:3306/springboot
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibetnate:
+        format_sql: true
