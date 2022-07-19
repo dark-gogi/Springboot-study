@@ -63,7 +63,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    void setProductTest(){
+    void saveProductTest(){
 
         /*
         Given-When-Then

@@ -26,6 +26,7 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    // 기존에 주입 받아야할 외부 객체에 대해 Mock 객체로 생성
     @MockBean
     ProductServiceWithoutDAO productServiceWithoutDAO;
 

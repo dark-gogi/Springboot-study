@@ -1,6 +1,7 @@
 package im.back.springboot.data.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,30 +10,40 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Builder
-@EqualsAndHashCode
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "product")
-public class Product {
+public class Product extends BaseEntity{
 
     @Id
-    @Column(name = "product_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "product_name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "product_price", nullable = false)
+    @Column(name = "price", nullable = false)
     private Integer price;
 
-    @Column(name = "product_stock", nullable = false)
+    @Column(name = "stock", nullable = false)
     private Integer stock;
 
-    @Column(name = "product_create_at")
+    @Column(name = "create_at")
     private LocalDateTime createAt;
 
-    @Column(name = "product_update_at")
+    @Column(name = "update_at")
     private LocalDateTime updateAt;
+
+    @OneToOne(mappedBy = "product")
+    @ToString.Exclude
+    private ProductDetail productDetail;
+
+    @ManyToOne
+    @JoinColumn(name =  "provider_id")
+    @ToString.Exclude
+    private Provider provider;
 
 }

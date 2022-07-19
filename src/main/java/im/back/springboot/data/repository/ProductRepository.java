@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 
 //JpaRepository 의 모든 메소드는 내부적으로 @Transactional 을 구현하고 있음
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>{
 
     Optional<Product> findById(Long id);
     List<Product> findAllByName(String name);
