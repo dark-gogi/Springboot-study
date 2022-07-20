@@ -16,7 +16,6 @@ import java.util.Optional;
 //JpaRepository 의 모든 메소드는 내부적으로 @Transactional 을 구현하고 있음
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
-    Optional<Product> findById(Long id);
     List<Product> findAllByName(String name);
     Product queryById(Long id);
 

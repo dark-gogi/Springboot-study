@@ -37,7 +37,12 @@ public class Product extends BaseEntity{
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
-    @OneToOne(mappedBy = "product")
+    /*
+     순환 참조로 인한 StackOverflowError 를 막기 위해 ToString 을 제외한다
+     ProductDetail 과 1:1 양방향 매핑을 위해서는
+     외래키로 사용되는 쪽이 mappedBy 를 설정한다
+     */
+    @OneToOne(mappedBy = "product", optional = false)
     @ToString.Exclude
     private ProductDetail productDetail;
 
