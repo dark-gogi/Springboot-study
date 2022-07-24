@@ -1,4 +1,4 @@
-package im.back.springboot.product.service.impl;
+package im.back.springboot.service.impl;
 
 import im.back.springboot.data.repository.ProductRepository;
 import org.junit.jupiter.api.extension.ExtendWith;

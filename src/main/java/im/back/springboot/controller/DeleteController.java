@@ -1,4 +1,4 @@
-package im.back.springboot.product.controller;
+package im.back.springboot.controller;
 
 import org.springframework.web.bind.annotation.*;
 

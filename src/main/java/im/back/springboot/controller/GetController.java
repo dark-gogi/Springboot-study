@@ -1,4 +1,4 @@
-package im.back.springboot.product.controller;
+package im.back.springboot.controller;
 
 import im.back.springboot.data.dto.MemberDTO;
 import org.springframework.web.bind.annotation.*;

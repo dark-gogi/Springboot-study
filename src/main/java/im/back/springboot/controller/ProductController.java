@@ -1,9 +1,9 @@
-package im.back.springboot.product.controller;
+package im.back.springboot.controller;
 
 import im.back.springboot.data.dto.ChangeProductNameDTO;
 import im.back.springboot.data.dto.ProductDTO;
 import im.back.springboot.data.dto.ProductResponseDTO;
-import im.back.springboot.product.service.ProductService;
+import im.back.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
