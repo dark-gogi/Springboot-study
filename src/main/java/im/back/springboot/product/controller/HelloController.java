@@ -1,4 +1,4 @@
-package im.back.springboot.controller;
+package im.back.springboot.product.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

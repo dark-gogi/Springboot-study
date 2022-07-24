@@ -1,4 +1,4 @@
-package im.back.springboot.service;
+package im.back.springboot.product.service;
 
 import im.back.springboot.data.dto.ProductDTO;
 import im.back.springboot.data.dto.ProductResponseDTO;

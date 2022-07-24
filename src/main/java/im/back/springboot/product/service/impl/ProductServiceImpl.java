@@ -1,38 +1,30 @@
-package im.back.springboot.service.impl;
+package im.back.springboot.product.service.impl;
 
+import im.back.springboot.data.dao.ProductDAO;
 import im.back.springboot.data.dto.ProductDTO;
 import im.back.springboot.data.dto.ProductResponseDTO;
 import im.back.springboot.data.entity.Product;
-import im.back.springboot.data.repository.ProductRepository;
-import im.back.springboot.service.ProductService;
+import im.back.springboot.product.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@Service
-public class ProductServiceWithoutDAO implements ProductService {
+public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ProductServiceWithoutDAO.class);
+    private final ProductDAO productDAO;
 
     @Autowired
-    public ProductServiceWithoutDAO(ProductRepository productRepository){
-        this.productRepository = productRepository;
+    public ProductServiceImpl(ProductDAO productDAO){
+        this.productDAO = productDAO;
     }
 
     @Override
     public ProductResponseDTO getProduct(Long id) {
-
-        LOGGER.info("[getProduct] : input id : {}" , id);
-
-        Product product = productRepository.findById(id).get();
-
-        LOGGER.info("[getProduct] : product id : {}, name : {}",product.getId(),product.getName());
-
+        Product product = productDAO.selectProduct(id);
         ProductResponseDTO productResponseDTO = new ProductResponseDTO();
 
         productResponseDTO.setId(product.getId());
@@ -46,7 +38,6 @@ public class ProductServiceWithoutDAO implements ProductService {
     @Override
     public ProductResponseDTO saveProduct(ProductDTO productDTO) {
 
-        LOGGER.info("[savedProduct] productDTO : {}", productDTO.toString());
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
@@ -55,7 +46,7 @@ public class ProductServiceWithoutDAO implements ProductService {
         product.setUpdateAt(LocalDateTime.now());
 
         //insert 결과 조회되는 id 값을 가져오기 위해 필요
-        Product savedProduct = productRepository.save(product);
+        Product savedProduct = productDAO.insertProduct(product);
 
         ProductResponseDTO productResponseDTO = new ProductResponseDTO(
                 savedProduct.getId(),
@@ -69,9 +60,7 @@ public class ProductServiceWithoutDAO implements ProductService {
     @Override
     public ProductResponseDTO changeProductName(Long id, String name) throws Exception {
 
-        Product foundProduct = productRepository.findById(id).get();
-        foundProduct.setName(name);
-        Product changedProduct = productRepository.save(foundProduct);
+        Product changedProduct = productDAO.updateProductName(id, name);
 
         ProductResponseDTO productResponseDTO = new ProductResponseDTO(
                 changedProduct.getId(),
@@ -85,6 +74,6 @@ public class ProductServiceWithoutDAO implements ProductService {
 
     @Override
     public void deleteProduct(Long id) throws Exception {
-        productRepository.deleteById(id);
+        productDAO.deleteProduct(id);
     }
 }

@@ -1,9 +1,9 @@
-package im.back.springboot.controller;
+package im.back.springboot.product.controller;
 
 import com.google.gson.Gson;
 import im.back.springboot.data.dto.ProductDTO;
 import im.back.springboot.data.dto.ProductResponseDTO;
-import im.back.springboot.service.impl.ProductServiceWithoutDAO;
+import im.back.springboot.product.service.impl.ProductServiceWithoutDAO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

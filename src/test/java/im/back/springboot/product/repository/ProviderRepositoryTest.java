@@ -4,11 +4,9 @@ import im.back.springboot.data.entity.Product;
 import im.back.springboot.data.entity.Provider;
 import im.back.springboot.data.repository.ProductRepository;
 import im.back.springboot.data.repository.ProviderRepository;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -94,80 +92,6 @@ public class ProviderRepositoryTest {
         for(Product product : productList){
             System.out.println(product);
         }
-
-    }
-
-    @Test
-    public void cascadeTest(){
-
-     Provider provider = savedProvider("만수홀딩스");
-
-     Product product = savedProduct("반도체",200000,100);
-     Product product2 = savedProduct("CPU",250000,50);
-     Product product3 = savedProduct("메모리",100000,150);
-
-     product.setProvider(provider);
-     product2.setProvider(provider);
-     product3.setProvider(provider);
-
-     /*
-        newArrayList 는 기존 list 에 입력받은 파라미터를 Collections.addAll 하여
-        list 를 반환
-      */
-     provider.getProductList().addAll(Lists.newArrayList(product,product2,product3));
-
-     providerRepository.save(provider);
-
-    }
-
-    private Provider savedProvider(String name){
-        Provider provider = new Provider();
-        provider.setName(name);
-
-        return provider;
-    }
-
-    private Product savedProduct(String name, int price, int stock){
-
-        Product product = new Product();
-
-        product.setName(name);
-        product.setPrice(price);
-        product.setStock(stock);
-
-        return product;
-    }
-
-    @Test
-    @Transactional
-    public void orphanRemovalTest(){
-
-        Provider provider = savedProvider("만수홀딩스");
-
-        Product product = savedProduct("반도체",200000,100);
-        Product product2 = savedProduct("CPU",250000,50);
-        Product product3 = savedProduct("메모리",100000,150);
-
-        product.setProvider(provider);
-        product2.setProvider(provider);
-        product3.setProvider(provider);
-
-     /*
-        newArrayList 는 기존 list 에 입력받은 파라미터를 Collections.addAll 하여
-        list 를 반환
-      */
-        provider.getProductList().addAll(Lists.newArrayList(product,product2,product3));
-
-        providerRepository.saveAndFlush(provider);
-
-        providerRepository.findAll().forEach(System.out::println);
-        productRepository.findAll().forEach(System.out::println);
-
-        Provider foundProvider = providerRepository.findById(1L).get();
-        foundProvider.getProductList().remove(0);
-
-        providerRepository.findAll().forEach(System.out::println);
-        productRepository.findAll().forEach(System.out::println);
 
     }
 

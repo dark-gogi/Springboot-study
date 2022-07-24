@@ -1,4 +1,4 @@
-package im.back.springboot.controller;
+package im.back.springboot.product.controller;
 
 import im.back.springboot.data.dto.MemberDTO;
 import org.springframework.http.HttpStatus;
